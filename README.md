@@ -30,6 +30,17 @@ This sample app is a very simple getting started layout for Quartz Training to r
 [Java Class file here](app/src/main/java/david/com/quartztraining/ContentActivity.java)
 
 ## Steps to setup
-1. Clone the repository
-2. Open the app using Android Studio. 
-3. Use built in VCS tools in Android Studio to push changes during our meeting our a VCS tool of your choice.
+#### There are a few ways that you can utilize version control during our meeting today.  
+1. Using the built in [Android Studio VCS tools][android-vcs]
+2. Using an [IDE of your choice][github-ide]
+3. Using git from the [Command line][command-line]
+
+Whatever tool you decide to use is O.K. Everyone in the training today has been added as a collaborator to the repository and has full read/write access to push directly to master. In order to get this app template locally follow these steps
+
+1. Clone the repository directly from here. git clone https://github.com/david-chambers/MiningTheQuartz.git
+2. Open the project in Android Studio (unless using the built in VCS tools) 
+3. During your turn, write code, add the files modified, commit, and push directly to master.  
+
+[android-vcs]: http://javapapers.com/android/android-studio-git-tutorial/
+[github-ide]: https://desktop.github.com/
+[command-line]: https://git-scm.com/downloads
