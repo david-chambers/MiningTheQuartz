@@ -7,10 +7,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.esri.arcgisruntime.mapping.Basemap;
+import com.esri.arcgisruntime.mapping.BasemapType;
+import com.esri.arcgisruntime.mapping.view.MapView;
+import com.esri.arcgisruntime.mapping.Map;
+
+
+
 public class MainActivity extends AppCompatActivity {
 
     //Button to open ContentActivity (holder for list of content)
     Button mButton;
+    private MapView mapView;
 
     //Variables to hold credentials obtained from LoginActivity
     private String mUsername;
@@ -20,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //inflate mapview
+        mapView = (MapView)findViewById(R.id.mapView);
+        Map map = new Map(BasemapType.IMAGERY, 34.056295, -117.195800,16);
+        mapView.setMap(map);
 
         //Inflate the Layer List Button
         mButton = (Button) findViewById(R.id.listActivityButton);

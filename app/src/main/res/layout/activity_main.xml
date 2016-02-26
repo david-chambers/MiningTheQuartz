@@ -10,12 +10,17 @@
     android:orientation="vertical"
     tools:context="david.com.quartztraining.MainActivity" android:weightSum="1">
 
-    <TextView
+  <!--  <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Replace this TextView with a Mapview!"
         android:textSize="20dp"
-        android:paddingBottom="410dp"/>
+        android:paddingBottom="410dp"/>-->
+    <com.esri.arcgisruntime.mapping.view.MapView
+        android:id="@+id/mapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </com.esri.arcgisruntime.mapping.view.MapView>
 
     <Button
         android:id="@+id/listActivityButton"

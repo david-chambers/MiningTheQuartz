@@ -15,13 +15,11 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
+        maven{
             url 'https://esri.bintray.com/arcgis'
         }
     }
 }
-
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir
