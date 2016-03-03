@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Start main activity
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                i.putExtra("usernameKey", mUsernameInput.getText().toString().trim());
+                i.putExtra("passwordKey", mPasswordInput.getText().toString().trim());
                 startActivity(i);
 
                 //TODO - Pass mUsername and mPassword from this activity to MainActivity.java
