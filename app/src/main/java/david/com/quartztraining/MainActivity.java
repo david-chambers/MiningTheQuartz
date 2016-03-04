@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(essMaps.getLoadStatus() == LoadStatus.LOADED){
-                    Toast.makeText(getApplicationContext(),"Portal loaded!",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Portal loaded!",Toast.LENGTH_LONG).show();
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
