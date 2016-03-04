@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/david-chambers/MiningTheQuartz.png?label=ready&title=Ready)](https://waffle.io/david-chambers/MiningTheQuartz)
 # Mining The Quartz - Android Edition
 Shared repo for SDK Quartz Training 2/26
 
