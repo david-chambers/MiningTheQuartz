@@ -2,6 +2,7 @@ package david.com.quartztraining;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
+import com.esri.arcgisruntime.datasource.Feature;
 import com.esri.arcgisruntime.loadable.LoadStatus;
 import com.esri.arcgisruntime.mapping.Basemap;
 import com.esri.arcgisruntime.mapping.BasemapType;
@@ -24,8 +26,10 @@ import com.esri.arcgisruntime.portal.PortalUserContent;
 import com.esri.arcgisruntime.security.Credential;
 import com.esri.arcgisruntime.security.UserCredential;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
     //Button to open ContentActivity (holder for list of content)
     FloatingActionButton mButton;
     private MapView mapView;
-
+    private ArrayList<FeatureServices> allFS = new ArrayList<FeatureServices>();
     //Variables to hold credentials obtained from LoginActivity
     private String mUsername;
     private String mPassword;
+    String itemTitle = "";
+    byte[] thumbnailInfo;
 
     //Portal variable
     private Portal essMaps;
@@ -86,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Launch the new Activity for listing user content
                 Intent i = new Intent(MainActivity.this, ContentActivity.class);
+                i.putExtra("FS", allFS);
                 startActivity(i);
             }
         });
@@ -103,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
+
                     StringBuilder userInfo = new StringBuilder();
                     //iterate items in root folder...
                     final PortalUserContent portalUserContent = contentFuture.get();
@@ -115,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                         if(item.getType() == PortalItemType.FEATURE_SERVICE) {
                             myPortalItems.add(item);
                             userInfo.append(String.format("Item: %s\n", item.getTitle()));
+
                         }
 
 
@@ -124,7 +133,38 @@ public class MainActivity extends AppCompatActivity {
                     if(myPortalItems != null){
                         for(PortalItem item : myPortalItems){
                             Log.d("MyTag", item.getTitle());
+                            FeatureServices featureServices = new FeatureServices(null, itemTitle);
+                            allFS.add(featureServices);
+                            if (item.getThumbnailFileName() != null)
+                            {
+                                itemTitle = item.getTitle();
+                                final ListenableFuture<byte[]> itemThumbnailData = item.fetchThumbnailAsync();
+                                itemThumbnailData.addDoneListener(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            thumbnailInfo = itemThumbnailData.get();
+                                            for (FeatureServices fs : allFS)
+                                            {
+                                                if(fs.getTitle() == itemTitle)
+                                                {
+                                                    fs.setThumbnail(thumbnailInfo);
+                                                }
+                                            }
+                                            Snackbar.make(mapView, itemTitle, Snackbar.LENGTH_SHORT).show();
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        } catch (ExecutionException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                });
+                            }
+
+
                         }
+                        Snackbar.make(mapView, "FeaturesAdded", Snackbar.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
