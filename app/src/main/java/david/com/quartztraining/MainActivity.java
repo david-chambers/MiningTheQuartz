@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                     if(myPortalItems != null){
                         for(PortalItem item : myPortalItems){
                             Log.d("MyTag", item.getTitle());
+                            itemTitle = item.getTitle();
                             FeatureServices featureServices = new FeatureServices(null, itemTitle);
                             allFS.add(featureServices);
                             if (item.getThumbnailFileName() != null)
