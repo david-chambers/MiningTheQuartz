@@ -91,16 +91,15 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         if (mDataset.get(position).getThumbnail() != null) {
             Bitmap bit = BitmapFactory.decodeByteArray(mDataset.get(position).getThumbnail(), 0, mDataset.get(position).getThumbnail().length);
             BitmapDrawable drawableBit = new BitmapDrawable(holder.mThumbnailView.getContext().getResources(), bit);
-            Bitmap.createScaledBitmap(bit, holder.mThumbnailView.getWidth(), holder.mThumbnailView.getHeight(), false);
+            Bitmap.createScaledBitmap(bit, 256, 256, false);
             holder.mThumbnailView.setImageBitmap(drawableBit.getBitmap());
         } else {
             BitmapFactory.Options opts = new BitmapFactory.Options();
-            opts.outHeight = holder.mThumbnailView.getHeight();
-            opts.outWidth = holder.mThumbnailView.getWidth();
-            Bitmap bit = BitmapFactory.decodeResource(holder.mThumbnailView.getResources(), R.id.portalcontentthumbnailholder, opts);
-            BitmapDrawable drawableBit = new BitmapDrawable(holder.mThumbnailView.getContext().getResources(), bit);
-            Bitmap.createScaledBitmap(bit, holder.mThumbnailView.getWidth(), holder.mThumbnailView.getHeight(), false);
-            holder.mThumbnailView.setImageBitmap(drawableBit.getBitmap());
+            //Bitmap bit = BitmapFactory.decodeResource(holder.mThumbnailView.getResources(), R.drawable.monteemoji);
+            //BitmapDrawable drawableBit = new BitmapDrawable(holder.mThumbnailView.getContext().getResources(), R.drawable.monteemoji);
+            Bitmap bit = BitmapFactory.decodeResource(holder.mThumbnailView.getContext().getResources(), R.drawable.esri);
+            Bitmap.createScaledBitmap(bit, 256, 256, false);
+            holder.mThumbnailView.setImageBitmap(bit);
         }
 
     }
