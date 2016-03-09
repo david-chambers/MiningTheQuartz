@@ -131,11 +131,10 @@ public class MainActivity extends AppCompatActivity {
 
                     //iterate user's folders - maybe implement this in the future
                     if(myPortalItems != null){
-                        for(PortalItem item : myPortalItems){
+                        for(final PortalItem item : myPortalItems){
                             Log.d("MyTag", item.getTitle());
                             itemTitle = item.getTitle();
-                            FeatureServices featureServices = new FeatureServices(null, itemTitle);
-                            allFS.add(featureServices);
+
                             if (item.getThumbnailFileName() != null)
                             {
                                 itemTitle = item.getTitle();
@@ -145,13 +144,8 @@ public class MainActivity extends AppCompatActivity {
                                     public void run() {
                                         try {
                                             thumbnailInfo = itemThumbnailData.get();
-                                            for (FeatureServices fs : allFS)
-                                            {
-                                                if(fs.getTitle() == itemTitle)
-                                                {
-                                                    fs.setThumbnail(thumbnailInfo);
-                                                }
-                                            }
+                                            FeatureServices featureServices = new FeatureServices(thumbnailInfo, item.getTitle());
+                                            allFS.add(featureServices);
                                             Snackbar.make(mapView, itemTitle, Snackbar.LENGTH_SHORT).show();
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
@@ -161,6 +155,10 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                 });
+                            }
+                            else {
+                                FeatureServices featureServices = new FeatureServices(null, item.getTitle());
+                                allFS.add(featureServices);
                             }
 
 
