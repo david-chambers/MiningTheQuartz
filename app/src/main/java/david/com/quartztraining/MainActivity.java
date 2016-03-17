@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Button to open ContentActivity (holder for list of content)
     Button mButton;
+    ImageButton listButton;
     private MapView mapView;
 
     //Variables to hold credentials obtained from LoginActivity
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         mapView.setMap(map);
 
         //Inflate the Layer List Button
-        mButton = (Button) findViewById(R.id.listActivityButton);
+        //mButton = (Button) findViewById(R.id.listActivityButton);
 
         //Add an on click listener to the Button that launches ContentActivity
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +91,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listButton = (ImageButton)findViewById(R.id.listActivityButton);
+
 
     }
+
+
 
     public void fetchUserContent(){
         final PortalUser user = essMaps.getPortalUser();
