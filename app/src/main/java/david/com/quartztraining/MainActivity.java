@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mUsername = getIntent().getExtras().getString("usernameKey");
         mPassword = getIntent().getExtras().getString("passwordKey");
 
+        listButton = (ImageButton)findViewById(R.id.listActivityButton);
         essMaps = new Portal("http://ess.maps.arcgis.com", new UserCredential(mUsername, mPassword));
         essMaps.loadAsync();
         essMaps.addDoneLoadingListener(new Runnable() {
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         //mButton = (Button) findViewById(R.id.listActivityButton);
 
         //Add an on click listener to the Button that launches ContentActivity
-        mButton.setOnClickListener(new View.OnClickListener() {
+        listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Launch the new Activity for listing user content
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        listButton = (ImageButton)findViewById(R.id.listActivityButton);
+        //
 
 
     }
